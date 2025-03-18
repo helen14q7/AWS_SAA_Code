@@ -1,4 +1,4 @@
-#!usr/bin/env bash
+#!/usr/bin/env bash
 
 echo "==delete bucket"
 
@@ -8,7 +8,7 @@ if [ -z "$1" ]; then
     exit 1
 fi
 
-BUCKET_NAME = $1
+BUCKET_NAME=$1
 
-aws s3api delete-bucket\
+aws s3api delete-bucket \
 --bucket $BUCKET_NAME

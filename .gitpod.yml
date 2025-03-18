@@ -3,6 +3,7 @@ tasks:
   - name: configuration
     before: |
       sudo apt-get install jq
+      sudo apt-get install tree
     
   - name: AWS-cli
     env: 
