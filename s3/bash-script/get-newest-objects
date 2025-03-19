@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+if [ -z "$1" ]; then
+    echo "There needs to be a bucket name eg. ./bucket my-bucket-name"
+    exit 1
+fi
+
+if [ -z "$2" ]; then
+    echo "There needs to be a number of newest files"
+    exit 1
+fi
+
+BUCKET_NAME=$1
+FILE_NUM=$2
+
+aws s3api list-objects \
+--bucket $BUCKET_NAME|jq -r --argjson FILE_NUM $FILE_NUM '.Contents|sort_by(.LastModified)|reverse|.[0:$FILE_NUM]|.[]|.Key'
