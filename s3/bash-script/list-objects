@@ -6,5 +6,9 @@ if [ -z "$1" ]; then
 fi
 
 BUCKET_NAME=$1
+# aws s3api list-objects \
+# --bucket $BUCKET_NAME | jq -r '.Contents|sort_by(.Key)|.[]|.Key'
+
 aws s3api list-objects \
---bucket $BUCKET_NAME | jq -r '.Contents|sort_by(.Key)|.[]|.Key'
+--bucket $BUCKET_NAME \
+--query 'Contents[0:2].{Key1:Key, Size1:Size}'
